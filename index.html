@@ -1,0 +1,45 @@
+<!-- BIBLIOTHEQUE QR CODE JAVASCRIPT-->
+<!-- https://davidshimjs.github.io/qrcodejs/ -->
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>QR Codes</title>
+  <meta name="viewport" content="width=device-width" />
+
+<body style="
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      ">
+  <input style="margin-bottom: 40px; display: none" type="text" id="qr-data" onchange="generateQR()" />
+  <div id="qrcode"></div>
+</body>
+<script src="qrcode.min.js"></script>
+<script>
+  let url = window.location.href;
+  let newUrl = url.replace(url.substr(24), "");
+  console.log(newUrl);
+  const qrdata = document.getElementById("qr-data");
+  const qrcode = new QRCode(document.getElementById("qrcode"), {
+    text: newUrl,
+    width: 400,
+    height: 400,
+    colorDark: "#000000",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H,
+  }),
+    generateQR = () => {
+      const data = qrdata.value;
+
+      qrcode.makeCode(data);
+      // console.log(data);
+    };
+</script>
+</head>
+
+</html>
